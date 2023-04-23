@@ -1,14 +1,16 @@
-import {mount} from '@vue/test-utils';
-import {expect, test} from 'vitest';
-import ReactiveCounter from '../src/components/ReactiveCounter.vue';
+import React from 'react';
+import { render, fireEvent, screen } from '@testing-library/react';
+import { expect, test } from 'vitest';
+import ReactiveCounter from '../src/components/ReactiveCounter';
 
 test('ReactiveHash component', async () => {
   expect(ReactiveCounter).toBeTruthy();
-  const wrapper = mount(ReactiveCounter);
 
-  const button = wrapper.get('button');
+  render(React.createElement(ReactiveCounter));
 
-  expect(button.text()).toBe('count is: 0');
-  await button.trigger('click');
-  expect(button.text()).toBe('count is: 1');
+  const button = screen.getByRole('button');
+
+  expect(button.textContent).toBe('count is: 0');
+  fireEvent.click(button);
+  expect(button.textContent).toBe('count is: 1');
 });

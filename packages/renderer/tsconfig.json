@@ -9,17 +9,24 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "types": ["node"],
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "useDefineForClassFields": true,
+    "allowJs": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
       "#preload": ["../preload/src/index"],
       "/@/*": ["./src/*"]
-    },
-    "lib": ["ESNext", "dom", "dom.iterable"]
+    }
   },
   "include": [
-    "src/**/*.vue",
     "src/**/*.ts",
     "src/**/*.tsx",
+    "test/**/*",
     "types/**/*.d.ts",
     "../../types/**/*.d.ts"
   ],

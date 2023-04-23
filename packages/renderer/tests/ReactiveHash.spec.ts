@@ -1,6 +1,7 @@
-import {mount} from '@vue/test-utils';
-import {expect, test, vi} from 'vitest';
-import ReactiveHash from '../src/components/ReactiveHash.vue';
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import { expect, test, vi } from 'vitest';
+import ReactiveHash from '../src/components/ReactiveHash';
 
 vi.mock('#preload', () => {
   return {
@@ -10,12 +11,13 @@ vi.mock('#preload', () => {
 
 test('ReactiveHash component', async () => {
   expect(ReactiveHash).toBeTruthy();
-  const wrapper = mount(ReactiveHash);
 
-  const dataInput = wrapper.get<HTMLInputElement>('input:not([readonly])');
-  const hashInput = wrapper.get<HTMLInputElement>('input[readonly]');
+  const { container } = render(React.createElement(ReactiveHash));
+
+  const dataInput = container.querySelector('input:not([readonly])') as HTMLInputElement;
+  const hashInput = container.querySelector('input[readonly]') as HTMLInputElement;
 
   const dataToHashed = Math.random().toString(36).slice(2, 7);
-  await dataInput.setValue(dataToHashed);
-  expect(hashInput.element.value).toBe(`${dataToHashed}:HASHED`);
+  fireEvent.change(dataInput, {target: {value: dataToHashed}});
+  expect(hashInput.value).toBe(`${dataToHashed}:HASHED`);
 });

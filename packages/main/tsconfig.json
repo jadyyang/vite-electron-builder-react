@@ -9,6 +9,8 @@
     "isolatedModules": true,
     "types": ["node"],
     "baseUrl": ".",
+    "noEmit": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "/@/*": ["./src/*"]
     }
