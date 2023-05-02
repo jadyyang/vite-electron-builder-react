@@ -2,8 +2,9 @@ import {app} from 'electron';
 import './security-restrictions';
 import {restoreOrCreateWindow} from '/@/mainWindow';
 import {platform} from 'node:process';
-import { Updater } from './updater';
-import log from 'electron-log';
+// 更新功能还未完全准备好，先暂时隐去
+// import { Updater } from './updater';
+// import log from 'electron-log';
 
 
 /**
@@ -74,17 +75,17 @@ app
  * if you compile production app without publishing it to distribution server.
  * Like `npm run compile` does. It's ok 😅
  */
-if (import.meta.env.PROD) {
-  app.whenReady()
-    .then(() => new Updater({
-      url: '',
-    }))
-    .then(async (updater) => {
-      await updater.checkForUpdates();
-      const filepath = await updater.download(() => {});
-      await updater.hotUpdate(filepath);
-    })
-    .catch((e) => {
-        log.error(e);
-    });
-}
+// if (import.meta.env.PROD) {
+//   app.whenReady()
+//     .then(() => new Updater({
+//       url: '',
+//     }))
+//     .then(async (updater) => {
+//       await updater.checkForUpdates();
+//       const filepath = await updater.download(() => {});
+//       await updater.hotUpdate(filepath);
+//     })
+//     .catch((e) => {
+//         log.error(e);
+//     });
+// }
